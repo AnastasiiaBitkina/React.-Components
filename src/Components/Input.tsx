@@ -10,10 +10,11 @@ const Input: React.FC = () => {
 
   return (
     <input
-      type="text"
+      className='input'
+      type='text'
       value={inputValue}
       onChange={handleInputChange}
-      placeholder="Enter breed"
+      placeholder='Enter breed'
     />
   );
 };
