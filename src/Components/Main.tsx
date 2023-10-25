@@ -1,8 +1,10 @@
 import React from 'react';
+import DogCard from './DogCard';
+
 
 const Main: React.FC = () => {
     return (
-        <div>Data</div>
+        <DogCard breed='DogCard.breed' />
     )
 }
 
