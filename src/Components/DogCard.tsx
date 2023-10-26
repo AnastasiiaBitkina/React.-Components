@@ -1,25 +1,39 @@
-import { FunctionComponent } from "react";
-//import { useEffect, useState } from 'react';
-import ApiComponent from './ApiComponent';
+import { FunctionComponent, useState, useEffect } from "react";
+import { getDataFromApi }  from './apiFunctions'
 
 interface Props {
     breed: string;
 }
 
 export const DogCard: FunctionComponent<Props> = () => {
-   /* const [randomBreed, setRandomBreed] = useState<string | null>('');
+    const [randomBreeds, setRandomBreeds] = useState<string[]>([]);
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getDataFromApi(); 
+                const breeds = Object.keys(data.message);
+                const randomIndexes = Array.from({ length: 5 }, () => Math.floor(Math.random() * breeds.length));
+                const selectedBreeds = randomIndexes.map(index => breeds[index]);
+                setRandomBreeds(selectedBreeds);
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        };
 
-        const breeds = ApiComponent.getDataFromApi(); 
-        const randomIndex = Math.floor(Math.random() * breeds.length);
-        setRandomBreed(breeds[randomIndex]);
-    }, []);*/
+        fetchData();
+    }, []);
+
 
     return (
         <div>
-        <p>{<ApiComponent /> || 'Unknown breed'}</p>
-        </div>  
+            <h2>Random Breeds:</h2>
+            <ul>
+                {randomBreeds.map((breed, index) => (
+                    <li key={index}>{breed || 'Unknown breed'}</li>
+                ))}
+            </ul>
+        </div>
     );
 }
 
