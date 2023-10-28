@@ -1,6 +1,11 @@
-import axios from 'axios';
 
 export async function getDataFromApi() {
-    const response = await axios.get('https://dog.ceo/api/breeds/list/all');
-    return response.data;
+    try {
+        const response = await fetch('https://api.giphy.com/v1/gifs/trending?api_key=ZO8VSEFzNRuoLyUghXJAd6x66oHd77PW')
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error loading data');
+        return [];
+    }
 }
