@@ -3,13 +3,14 @@ import { getDataFromApi } from './apiFunctions'
 
 
 export const GifCard = () => {
-    const [gifData, setData] = useState({ data: { images: { original: { url: ""}}}})
+    const [gifData, setData] = useState({ data: { images: { original: { url: "" } } } })
     useEffect(() => {
-        console.log("hi")
-        getDataFromApi().then(data => {
-            console.log(1);
-            setData(data);
-        })
+        if (typeof window !== 'undefined') {
+            getDataFromApi().then(data => {
+                console.log(1);
+                setData(data);
+            })
+        }
     }, []);
 
     const { data } = gifData;

@@ -1,10 +1,10 @@
 import React from 'react';
-import GifCard from './GifCard';
+import GifCard2 from './GifCard2';
 
 
 const Main: React.FC = () => {
     return (
-        <GifCard />
+        <GifCard2 />
     )
 }
 
