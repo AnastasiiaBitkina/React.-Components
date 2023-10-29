@@ -6,7 +6,6 @@ function Header() {
     <div className="header">
       <div className="input-container">
         <Input />
-        <button className="search-button">Search!</button>
       </div>
     </div>
   )
