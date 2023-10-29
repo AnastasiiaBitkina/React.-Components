@@ -12,7 +12,7 @@ interface GifData {
   }[];
 }
 
-function App() {
+function Search() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [gifData, setGifData] = useState<GifData | null>(null);
 
@@ -57,4 +57,4 @@ function App() {
   );
 }
 
-export default App;
+export default Search;

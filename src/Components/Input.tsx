@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({ value, onChange }) => {
         onChange={handleInputChange}
         placeholder='Enter breed'
       />
-       <button className="search-button">Search!</button>
+      <button className="search-button">Search!</button>
     </div>
 
   );
