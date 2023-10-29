@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GifData } from "./apiFunctions";
 
 interface PaginationProps {
   gifs: GifData;
 }
 
+interface ShuffledGifs {
+  data: GifData["data"];
+}
+
 const Pagination: React.FC<PaginationProps> = ({ gifs }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [shuffledGifs, setShuffledGifs] = useState<ShuffledGifs | null>(null);
   const itemsPerPage: number = 5;
 
+  useEffect(() => {
+    if (gifs.data) {
+      const shuffled = shuffleArray(gifs.data);
+      setShuffledGifs({ data: shuffled });
+    }
+  }, [gifs]);
+
   const displayGifs = () => {
+    if (!shuffledGifs) {
+      return null;
+    }
+
     const startIndex: number = (currentPage - 1) * itemsPerPage;
     const endIndex: number = currentPage * itemsPerPage;
-    const currentGifs = gifs.data.slice(startIndex, endIndex);
+    const currentGifs = shuffledGifs.data.slice(startIndex, endIndex);
 
     return (
       <div>
@@ -41,6 +57,15 @@ const Pagination: React.FC<PaginationProps> = ({ gifs }) => {
     }
   };
 
+  const shuffleArray = (array: GifData["data"]) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   return (
     <div>
       {displayGifs()}
@@ -60,4 +85,3 @@ const Pagination: React.FC<PaginationProps> = ({ gifs }) => {
 };
 
 export default Pagination;
-
